@@ -4,17 +4,18 @@ from .models import Post
 
 class PostModelTest(TestCase):
     def setUp(self):
-        Post.objects.create(title='Mavzu', text='Yangiliklar sayti')
+        Post.objects.create(title='Mavzu', text='Yangiliklar sayti', author='<NAME>')
 
     def test_text_content(self):
         post = Post.objects.get(pk=1)  # PK orqali olish
         self.assertEqual(post.title, 'Mavzu')
         self.assertEqual(post.text, 'Yangiliklar sayti')
+        self.assertEqual(post.author, 'Abduxalil')
 
 
 class HomePageViewTest(TestCase):
     def setUp(self):
-        Post.objects.create(title='Mavzu 2', text='boshqa yangiliklar')
+        Post.objects.create(title='Mavzu 2', text='boshqa yangiliklar', author='Abduxalil')
 
     def test_url_exists_at_root(self):
         resp = self.client.get('/')
